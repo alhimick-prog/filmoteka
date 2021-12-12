@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+
+ .header-style-extension {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+ }
+ .flexible-element {
+   display: flex;
+ }
+ .center-label {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+ }

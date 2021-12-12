@@ -1,0 +1,3 @@
+class StartPage < ApplicationRecord
+
+end
