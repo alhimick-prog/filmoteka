@@ -1,3 +1,0 @@
-class TestPage < ApplicationRecord
-
-end
