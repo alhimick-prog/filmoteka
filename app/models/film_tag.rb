@@ -1,0 +1,2 @@
+class FilmTag < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class WatchItem < ApplicationRecord
+end
