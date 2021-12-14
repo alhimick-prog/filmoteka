@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.2'
 
 gem 'activeadmin', '~> 2.9.0'
+gem 'annotate_models', '~> 1.0.1'
 gem 'bootstrap', '~> 5.1.3'
 gem 'bullet', '~> 6.1.5'
 gem 'devise', '~> 4.8.0'

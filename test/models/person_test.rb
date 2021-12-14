@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  birthday   :datetime
+#  death_date :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require "test_helper"
 
 class PersonTest < ActiveSupport::TestCase
