@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_204549) do
+ActiveRecord::Schema.define(version: 2021_12_15_181417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 2021_12_14_204549) do
     t.integer "age_restriction", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id"
-    t.index ["users_id"], name: "index_films_on_users_id"
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_films_on_creator_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_204549) do
   add_foreign_key "film_people", "people"
   add_foreign_key "film_tags", "films"
   add_foreign_key "film_tags", "tags"
-  add_foreign_key "films", "users", column: "users_id"
+  add_foreign_key "films", "users", column: "creator_id"
   add_foreign_key "seasons", "films"
   add_foreign_key "watch_items", "films"
   add_foreign_key "watch_items", "users"

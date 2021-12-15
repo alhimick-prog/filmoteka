@@ -14,13 +14,15 @@
 #  users_id        :bigint
 #
 class Film < ApplicationRecord
+  belongs_to :creator, class_name: 'User', optional: true
+
   has_many :category, through: :film_category
   has_many :country, through: :film_country
   has_many :genre, through: :film_genre
   has_many :person, through: :film_person
   has_many :tag, through: :film_tag
   has_many :season
-  belongs_to :user
-  has_many :user, through: :watch_item
-  has_many :comment, as: commentable
+  has_many :watch_items
+  has_many :users, through: :watch_items
+  has_many :comments, as: :commentable
 end
