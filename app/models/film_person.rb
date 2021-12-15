@@ -10,4 +10,6 @@
 #  updated_at :datetime         not null
 #
 class FilmPerson < ApplicationRecord
+  belongs_to :film
+  belongs_to :person
 end

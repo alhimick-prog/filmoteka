@@ -11,4 +11,6 @@
 #  updated_at   :datetime         not null
 #
 class Season < ApplicationRecord
+  belongs_to :film
+  has_many :episode
 end

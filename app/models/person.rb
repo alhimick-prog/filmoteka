@@ -10,4 +10,5 @@
 #  updated_at :datetime         not null
 #
 class Person < ApplicationRecord
+  has_many :film, through: :film_person
 end

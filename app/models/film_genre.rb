@@ -9,4 +9,6 @@
 #  updated_at :datetime         not null
 #
 class FilmGenre < ApplicationRecord
+  belongs_to :film
+  belongs_to :genre
 end

@@ -10,4 +10,6 @@
 #  updated_at :datetime         not null
 #
 class WatchItem < ApplicationRecord
+  belongs_to :user
+  belongs_to :film
 end
