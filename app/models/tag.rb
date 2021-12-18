@@ -8,5 +8,6 @@
 #  updated_at :datetime         not null
 #
 class Tag < ApplicationRecord
-  has_many :film, through: :film_tag
+  has_many :film_tags
+  has_many :films, through: :film_tags
 end

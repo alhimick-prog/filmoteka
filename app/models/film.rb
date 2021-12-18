@@ -16,11 +16,16 @@
 class Film < ApplicationRecord
   belongs_to :creator, class_name: 'User', optional: true
 
-  has_many :category, through: :film_category
-  has_many :country, through: :film_country
-  has_many :genre, through: :film_genre
-  has_many :person, through: :film_person
-  has_many :tag, through: :film_tag
+  has_many :film_categories
+  has_many :categories, through: :film_categories
+  has_many :film_countries
+  has_many :countries, through: :film_countries
+  has_many :film_genres
+  has_many :genres, through: :film_genres
+  has_many :film_people
+  has_many :people, through: :film_people
+  has_many :film_tags
+  has_many :tags, through: :film_tags
   has_many :season
   has_many :watch_items
   has_many :users, through: :watch_items

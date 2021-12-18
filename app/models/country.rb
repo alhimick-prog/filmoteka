@@ -9,5 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Country < ApplicationRecord
-  has_many :film, through: :film_country
+  has_many :film_countries
+  has_many :films, through: :film_countries
 end

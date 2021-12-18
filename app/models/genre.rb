@@ -8,5 +8,6 @@
 #  updated_at :datetime         not null
 #
 class Genre < ApplicationRecord
-  has_many :film, through: film_genre
+  has_many :film_genres
+  has_many :films, through: :film_genres
 end
