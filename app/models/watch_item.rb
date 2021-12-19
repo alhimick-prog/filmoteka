@@ -10,6 +10,10 @@
 #  updated_at :datetime         not null
 #
 class WatchItem < ApplicationRecord
+  enum status: { Watching: 0, Viewed: 1, WillWatch: 2 }
+
   belongs_to :user
   belongs_to :film
+
+  validates :status, presence: true
 end

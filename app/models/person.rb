@@ -12,4 +12,8 @@
 class Person < ApplicationRecord
   has_many :film_people
   has_many :films, through: :film_people
+
+  validates :name, presence: true, length: { in: 1..100 }
+  validates_date :birthday, between: ['01.01.1800', :today], allow_blank: true
+  validates_date :death_date, between: ['01.01.1895', :today], allow_blank: true
 end

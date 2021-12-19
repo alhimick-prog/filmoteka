@@ -10,4 +10,6 @@
 class Category < ApplicationRecord
   has_many :film_categories
   has_many :films, through: :film_categories
+
+  validates :name, presence: true, length: { in: 1..20 }
 end

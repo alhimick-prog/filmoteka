@@ -11,4 +11,7 @@
 #
 class Episode < ApplicationRecord
   belongs_to :season
+
+  validates :title, presence: true, length: { in: 1..100 }
+  validates :text, length: { in: 1..300 }, allow_blank: true
 end

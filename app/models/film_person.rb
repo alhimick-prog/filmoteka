@@ -10,6 +10,10 @@
 #  updated_at :datetime         not null
 #
 class FilmPerson < ApplicationRecord
+  enum role: { Actor: 0, Director: 1 }
+
   belongs_to :film
   belongs_to :person
+
+  validates :role, presence: true
 end
