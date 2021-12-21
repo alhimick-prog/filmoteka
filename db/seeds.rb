@@ -5,26 +5,27 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-#require 'rake'
 class Seed
   def self.reset_database_before_seeding
     puts "========== Reset DB before seeding ========="
-    #Rails.application.load_tasks
     require 'rake'
     Rake::Task['db:reset'].invoke
+    Rake::Task['db:create'].invoke
+    Rake::Task['db:migrate'].invoke
   end
-  def self.seed_users
-    puts "========== Seed users ========="
-    100.times do
+  def self.seed_users(number=1)
+    puts "========== Seed #{number} users =========="
+    number.times do
       User.create!(email:Faker::Internet.email,
                    name:Faker::Name.name,
+                   password: '123456',
                    nickname:Faker::Lorem.word,
                    birthday:Faker::Date.between(from: '1900-01-01', to: '2003-01-01'))
     end
   end
-  def self.seed_films
-    puts "========== Seed films ========="
-    1000.times do
+  def self.seed_films(number=1)
+    puts "========== Seed #{number} films =========="
+    number.times do
       Film.create!(title:Faker::Movie.title,
                    description:Faker::Lorem.sentence(word_count: 10, supplemental: true, random_words_to_add: 10),
                    trailer_url:Faker::Internet.url,
@@ -34,24 +35,106 @@ class Seed
     end
   end
   def self.seed_categories
-    puts "========== Seed categories ========="
+    puts "========== Seed categories =========="
     ['Family', 'Horror', 'Male', "Children's", 'Adult', 'Soap opera'].each do |category_name|
       Category.create!(name:category_name)
     end
   end
   def self.seed_country
-    puts "========== Seed country ========="
+    puts "========== Seed country =========="
     ISO3166::Country.translations(:en).each do |symb, country_name|
       Country.create!(name:country_name, banner:ISO3166::Country(symb).emoji_flag)
     end
   end
-  def self.seed_
-    puts "========== Seed  ========="
+  def self.seed_genre
+    puts "========== Seed genres =========="
+    ['Action movie', 'Western', 'Detective', 'Comedy', 'Drama', 'Melodrama', 'Noir', 'Musical'].each do |genre|
+      Genre.create!(name:genre)
+    end
+  end
+  def self.seed_person(number=1)
+    puts "========== Seed #{number} person =========="
+    number.times do
+      birth = Faker::Date.between(from: '1800-01-01', to: Date.today)
+      min_death_date = birth > Date.parse('1895-01-01') ? birth : Date.parse('1895-01-01')
+      death = nil
+      if rand(1..100) > 70
+        death = Faker::Date.between(from: min_death_date, to: Date.today)
+      end
+      Person.create!(name:Faker::Name.name,
+                     birthday:birth,
+                     death_date:death)
+    end
+  end
+  def self.seed_tag(number=1)
+    puts "========== Seed #{number} tag =========="
+    number.times do
+      Tag.create!(name:Faker::Lorem.word)
+    end
+  end
+  def self.seed_comment(number_to_films=0, number_to_comments=0)
+    puts "========== Seed #{number_to_films} comment to films =========="
+    number_to_films.times do
+      object_id = rand(1..Film.count)
+      author_id = rand(1..User.count)
+      Comment.create!(commentable_id:object_id,
+                      commentable_type:'Film',
+                      user_id:author_id,
+                      body:Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 50))
+    end
+    puts "========== Seed #{number_to_comments} comment to comments =========="
+    number_to_comments.times do
+      object_id = rand(1..Comment.count)
+      author_id = rand(1..User.count)
+      Comment.create!(commentable_id:object_id,
+                      commentable_type:'Comment',
+                      user_id:author_id,
+                      body:Faker::Lorem.sentence(word_count: 3, supplemental: true, random_words_to_add: 50))
+    end
+  end
+  def self.seed_season(number=1)
+    puts "========== Seed #{number} =========="
+    number.times do
+      belongs_to_id = rand(1..Film.count)
+      Season.create!(film_id:belongs_to_id,
+                     title:"#{Film.find(belongs_to_id).title} season: #{Faker::Lorem.word}",
+                     description:Faker::Lorem.sentence(word_count: 10, supplemental: true, random_words_to_add: 10),
+                     release_date:Faker::Date.between(from: Film.find(belongs_to_id).release_date, to: Date.today))
+    end
+  end
+  def self.seed_episode(seasons_numb=1, min=5, max=15)
+    puts "========== Seed from #{min} to #{max} episodes for #{seasons_numb} season =========="
+    seasons_numb.times do
+      belongs_to_season_id = rand(1..Season.count)
+      rand(min..max).times do |ep_numb|
+        Episode.create!(season_id:belongs_to_season_id,
+                        title:ep_numb,
+                        description:Faker::Lorem.sentence(word_count: 10, supplemental: true, random_words_to_add: 10))
+      end
+    end
+  end
+  def self.seed_f_category
+    puts "========== Seed category =========="
+    number.times do
+    end
+  end
+  def self.seed_(number=1)
+    puts "========== Seed #{number} =========="
+    number.times do
+    end
   end
 end
 
-Seed.reset_database_before_seeding
-#Seed.seed_users
-#Seed.seed_films
+#Seed.reset_database_before_seeding
+#Seed.seed_users(30)
+#Seed.seed_films(1000)
 #Seed.seed_categories
 #Seed.seed_country
+#Seed.seed_genre
+#Seed.seed_person(300)
+#Seed.seed_tag(50)
+#Seed.seed_comment(500, 100)
+#Seed.seed_season(10)
+#Seed.seed_episode(seasons_numb=10, min=3, max=12)
+Seed.seed_f_category
+
