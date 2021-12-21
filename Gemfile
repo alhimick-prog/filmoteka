@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.2'
 
 gem 'activeadmin', '~> 2.9.0'
+gem 'annotate_models', '~> 1.0.1'
 gem 'bootstrap', '~> 5.1.3'
 gem 'bullet', '~> 6.1.5'
 gem 'devise', '~> 4.8.0'
@@ -25,6 +26,7 @@ gem 'sidekiq', '~> 6.3.1'
 gem 'simple_form', '~> 5.1.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+gem 'validates_timeliness', '~> 6.0.0.beta2'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
