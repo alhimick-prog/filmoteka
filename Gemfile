@@ -20,6 +20,7 @@ gem 'pundit', '~> 2.1.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'rails_admin', '~> 2.2.1'
+gem 'rubocop-rails', '~> 2.12', '>= 2.12.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 gem 'sidekiq', '~> 6.3.1'
