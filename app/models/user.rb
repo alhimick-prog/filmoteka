@@ -25,7 +25,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
+  enum role: { Subscriber: 0, Editor: 1, Admin: 2 }
+
   has_many :creator_films, class_name: 'Film', foreign_key: :creator_id
   has_many :watch_items
   has_many :films, through: :watch_items
