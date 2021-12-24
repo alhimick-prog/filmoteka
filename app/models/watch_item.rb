@@ -10,10 +10,11 @@
 #  updated_at :datetime         not null
 #
 class WatchItem < ApplicationRecord
-  enum status: { Watching: 0, Viewed: 1, WillWatch: 2 }
+  STATUSES = ['Watching', 'Viewed', 'WillWatch']
+  enum status: STATUSES
 
   belongs_to :user
   belongs_to :film
 
-  validates :status, presence: true
+  validates :status, presence: true, inclusion: { in: STATUSES }
 end

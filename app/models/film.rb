@@ -34,7 +34,7 @@ class Film < ApplicationRecord
   has_many :users, through: :watch_items
   has_many :comments, as: :commentable
 
-  validates :title, presence: true, length: { in: 1..50 }
+  validates :title, presence: true, length: { in: 1..100 }
   validates :description, presence: true, length: { in: 10..500 }
   validates :trailer_url, format: /\A#{URI::regexp(['http', 'https'])}\z/, allow_blank: true
   validates_date :release_date, between: ['01.01.1895', :today]
