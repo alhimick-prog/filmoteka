@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 class Person < ApplicationRecord
-  has_many :film_people
+  has_many :film_people, dependent: :destroy
   has_many :films, through: :film_people
 
   validates :name, presence: true, length: { in: 1..100 }

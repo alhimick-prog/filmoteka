@@ -13,7 +13,7 @@
 class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
   belongs_to :user
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: nil
 
   validates :body, presence: true, length: { in: 5..300 }
 end

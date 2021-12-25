@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 class FilmPerson < ApplicationRecord
-  ROLES = ['Actor', 'Director']
+  ROLES = %w[Actor Director].freeze
   enum role: ROLES
 
   belongs_to :film
