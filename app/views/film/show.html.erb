@@ -1,0 +1,68 @@
+<h1> <%= @film.title %> </h1>
+<ul>
+  <p>
+    Description:
+    <%= @film.description %>
+  </p>
+  <p>
+    Trailer:
+    <%= @film.trailer_url %>
+  </p>
+  <p>
+    Relese date:
+    <%= @film.release_date %>
+  </p>
+  <p>
+    Duration:
+    <%= @film.duration %>
+  </p>
+  <p>
+    Age restriction:
+    <%= @film.age_restriction %>
+  </p>
+  <p>
+    Categories:
+    <% @film.categories.each do |record| %>
+      <%= record.name %>
+    <% end %>
+  </p>
+  <p>
+    Countries:
+    <% @film.countries.each do |record| %>
+      <%= record.name %>
+      <%= record.banner %>
+    <% end %>
+  </p>
+  <p>
+    Genres:
+    <% @film.genres.each do |record| %>
+      <%= record.name %>
+    <% end %>
+  </p>
+  <p>
+    Tags:
+    <% @film.tags.each do |record| %>
+      <%= record.name %>
+    <% end %>
+  </p>
+  <p>
+  Directors:
+    <% @film.film_people.each do |record| %>
+      <%= Person.find(record.person_id).name if record.role == 'Director' %>
+    <% end %>
+  </p>
+  <p>
+  Actors:
+    <% @film.film_people.each do |record| %>
+      <%= Person.find(record.person_id).name if record.role == 'Actor' %>
+    <% end %>
+  </p>
+  <p>
+  <% if !@film.season.size.zero? %>
+    <%= 'Seasons:' %>
+    <% @film.season.each do |record| %>
+      <%= record.title %>
+    <% end %>
+  <% end %>
+  </p>
+</ul>
