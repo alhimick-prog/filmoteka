@@ -16,28 +16,31 @@
 require 'uri'
 
 class Film < ApplicationRecord
-
   belongs_to :creator, class_name: 'User', optional: true
 
-  has_many :film_categories
+  has_many :film_categories, dependent: :destroy
   has_many :categories, through: :film_categories
-  has_many :film_countries
+  has_many :film_countries, dependent: :destroy
   has_many :countries, through: :film_countries
-  has_many :film_genres
+  has_many :film_genres, dependent: :destroy
   has_many :genres, through: :film_genres
-  has_many :film_people
+  has_many :film_people, dependent: :destroy
   has_many :people, through: :film_people
-  has_many :film_tags
+  has_many :film_tags, dependent: :destroy
   has_many :tags, through: :film_tags
-  has_many :season
-  has_many :watch_items
+  has_many :season, dependent: :destroy
+  has_many :watch_items, dependent: :destroy
   has_many :users, through: :watch_items
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates :title, presence: true, length: { in: 1..100 }
   validates :description, presence: true, length: { in: 10..500 }
-  validates :trailer_url, format: /\A#{URI::regexp(['http', 'https'])}\z/, allow_blank: true
+  validates :trailer_url, format: /\A#{URI.DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates_date :release_date, between: ['01.01.1895', :today]
-  validates :duration, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 3, less_than_or_equal_to: 600 }
-  validates :age_restriction, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 21 }
+  validates :duration,
+            presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 3, less_than_or_equal_to: 600 }
+  validates :age_restriction,
+            presence: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 21 }
 end

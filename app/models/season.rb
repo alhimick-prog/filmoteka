@@ -12,7 +12,7 @@
 #
 class Season < ApplicationRecord
   belongs_to :film
-  has_many :episode
+  has_many :episode, dependent: :destroy
 
   validates :title, presence: true, length: { in: 1..100 }
   validates :description, length: { in: 1..300 }, allow_blank: true

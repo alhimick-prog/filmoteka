@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 class WatchItem < ApplicationRecord
-  STATUSES = ['Watching', 'Viewed', 'WillWatch']
+  STATUSES = %w[Watching Viewed WillWatch].freeze
   enum status: STATUSES
 
   belongs_to :user

@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 class Genre < ApplicationRecord
-  has_many :film_genres
+  has_many :film_genres, dependent: :destroy
   has_many :films, through: :film_genres
 
   validates :name, presence: true, length: { in: 1..20 }
