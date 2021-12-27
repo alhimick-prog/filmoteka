@@ -15,6 +15,6 @@ class Season < ApplicationRecord
   has_many :episode, dependent: :destroy
 
   validates :title, presence: true, length: { in: 1..100 }
-  validates :text, length: { in: 1..300 }, allow_blank: true
+  validates :description, length: { in: 1..300 }, allow_blank: true
   validates_date :release_date, presence: true, between: ['01.01.1800', :today]
 end
