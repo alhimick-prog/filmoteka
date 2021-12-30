@@ -35,7 +35,7 @@ class Film < ApplicationRecord
 
   validates :title, presence: true, length: { in: 1..100 }
   validates :description, presence: true, length: { in: 10..500 }
-  validates :trailer_url, format: /\A#{URI.DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
+  validates :trailer_url, format: /\A#{URI::DEFAULT_PARSER.make_regexp(%w[http https])}\z/, allow_blank: true
   validates_date :release_date, between: ['01.01.1895', :today]
   validates :duration,
             presence: true,
