@@ -28,7 +28,7 @@ class Film < ApplicationRecord
   has_many :people, through: :film_people
   has_many :film_tags, dependent: :destroy
   has_many :tags, through: :film_tags
-  has_many :season, dependent: :destroy
+  has_many :seasons, dependent: :destroy
   has_many :watch_items, dependent: :destroy
   has_many :users, through: :watch_items
   has_many :comments, as: :commentable, dependent: :destroy

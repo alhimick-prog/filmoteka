@@ -58,9 +58,9 @@
     <% end %>
   </p>
   <p>
-  <% if !@film.season.size.zero? %>
+  <% if !@film.seasons.size.zero? %>
     <%= 'Seasons:' %>
-    <% @film.season.each do |record| %>
+    <% @film.seasons.each do |record| %>
       <%= record.title %>
     <% end %>
   <% end %>
