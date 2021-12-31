@@ -25,4 +25,12 @@
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @films %>
+<div class="center-container">
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info @films %>
+    </div>
+    <%= will_paginate @films, :container => false %>
+  </div>
+</div>
+
