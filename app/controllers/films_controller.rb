@@ -2,7 +2,7 @@ class FilmsController < ApplicationController
   def index
     @films = Film.paginate(page: params[:page])
   end
-  
+
   def show
     @film = Film.find(params[:id])
   end
@@ -43,7 +43,9 @@ class FilmsController < ApplicationController
   end
 
   private
+
   def film_params
-    params.require(:film).permit(:title, :description, :trailer_url, :release_date, :duration, :age_restriction, :creator_id)
+    params.require(:film).permit(:title, :description, :trailer_url, :release_date, :duration, :age_restriction,
+                                 :creator_id)
   end
 end
