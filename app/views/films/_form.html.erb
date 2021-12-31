@@ -56,6 +56,11 @@
   </div>
 
   <div>
+    <%= form.label :categories %><br>
+    <%= form.select(:categories, Category.all.map {|p| [ p.name, p.id ] } ) %> 
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

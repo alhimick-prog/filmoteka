@@ -43,4 +43,6 @@ class Film < ApplicationRecord
   validates :age_restriction,
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 21 }
+  
+  self.per_page = 15
 end
