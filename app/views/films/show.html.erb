@@ -66,3 +66,7 @@
   <% end %>
   </p>
 </ul>
+<ul>
+  <li><%= link_to "Edit", edit_film_path(@film) %></li>
+  <li><%= link_to "Destroy", film_path(@film), method: :delete, data: { confirm: "Are you sure?" } %></li>
+</ul>

@@ -15,13 +15,12 @@
       <% end %>
       <div class="dropdown">
         <div class="nav-link dropdown-toggle" style="color:blue" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Menu
+          Films
         </div>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <%= link_to "Create film", new_film_path, class: "dropdown-item" %>
+            <%= link_to "Films list", films_path, class: "dropdown-item" %>
+            <%# <div class="dropdown-divider"></div> %>
           </div>
       </div>
     </nav>
