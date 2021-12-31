@@ -1,4 +1,8 @@
-<h1> <%= @film.title %> </h1>
+<h1 class="text-center">
+  <%= @film.title %>
+  <%= link_to "Edit", edit_film_path(@film), class: 'btn btn-primary' %></li>
+  <%= link_to "Destroy", film_path(@film), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></li>
+</h1>
 <ul>
   <p>
     Description:
@@ -19,7 +23,7 @@
   <p>
     Age restriction:
     <%= @film.age_restriction %>
-  </p>
+  </p>  
   <p>
     Categories:
     <% @film.categories.each do |record| %>
@@ -65,8 +69,4 @@
     <% end %>
   <% end %>
   </p>
-</ul>
-<ul>
-  <li><%= link_to "Edit", edit_film_path(@film) %></li>
-  <li><%= link_to "Destroy", film_path(@film), method: :delete, data: { confirm: "Are you sure?" } %></li>
 </ul>
