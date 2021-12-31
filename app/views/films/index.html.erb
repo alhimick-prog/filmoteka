@@ -8,6 +8,7 @@
       <th scope="col">Year</th>
       <th scope="col">Categories</th>
       <th scope="col">Genres</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -19,8 +20,12 @@
         <td><%=film.categories.map(&:name).join(', ') %></td>
         <td><%=film.genres.map(&:name).join(', ')%></td>
         <td>
-          <%= link_to "Edit", edit_film_path(film), class: 'btn btn-primary' %>
-          <%= link_to "Destroy", film_path(film), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% if policy(film).edit? %>
+            <%= link_to "Edit", edit_film_path(film), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(film).destroy? %>
+            <%= link_to "Destroy", film_path(film), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>

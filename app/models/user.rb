@@ -13,7 +13,7 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  name                   :string           not null
-#  role                   :integer          default(0), not null
+#  role                   :integer          default("subscriber"), not null
 #  nickname               :string
 #  birthday               :datetime         default(Thu, 01 Jan 1970 00:00:00.000000000 UTC +00:00), not null
 #  address                :string
@@ -31,4 +31,12 @@ class User < ApplicationRecord
   has_many :watch_items, dependent: :destroy
   has_many :films, through: :watch_items
   has_many :comment, dependent: nil
+
+  def admin?
+    role == 'admin'
+  end
+
+  def editor?
+    role == 'editor'
+  end
 end

@@ -1,10 +1,11 @@
 class FilmsController < ApplicationController
   def index
-    @films = Film.paginate(page: params[:page])
+    @films = policy_scope(Film.paginate(page: params[:page]))
   end
 
   def show
     @film = Film.find(params[:id])
+    authorize(@film)
   end
 
   def new
