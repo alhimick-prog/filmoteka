@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root "home#index"
   resources :films
   resources :categories
+  resources :countries
+  resoursec :genres
 end

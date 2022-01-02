@@ -1,10 +1,18 @@
-<%= form_with model: category do |form| %>
+<%= form_with model: country do |form| %>
   <div>
     <%= form.label :name %><br>
     <%= form.text_field :name %>
     <% category.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
     <% end %>
+  </div>
+
+  <div>
+  <%= form.label :banner %><br>
+  <%= form.text_field :banner %>
+  <% category.errors.full_messages_for(:name).each do |message| %>
+    <div><%= message %></div>
+  <% end %>
   </div>
 
   <div>
