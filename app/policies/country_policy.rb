@@ -8,7 +8,7 @@ class CountryPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin? || user.editor?
+    user.admin?
   end
   
   def edit?
@@ -16,11 +16,11 @@ class CountryPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || user.editor? && record.creator_id == user.id
+    user.admin?
   end
 
   def destroy?
-    user.admin? || user.editor? && record.creator_id == user.id
+    user.admin?
   end
 
   class Scope

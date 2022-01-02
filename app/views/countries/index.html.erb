@@ -1,5 +1,7 @@
 <h1 class="text-center">Countries list</h1>
-<%= link_to "Create country", new_country_path, class: 'btn btn-primary' %>
+<% if policy(Country).edit? %>
+  <%= link_to "Create country", new_country_path, class: 'btn btn-primary' %>
+<% end %>
 <table class="table">
   <thead>
     <tr>
@@ -20,8 +22,12 @@
         <td><%=country.created_at%></td>
         <td><%=country.updated_at%></td>
         <td>
-          <%= link_to "Edit", edit_country_path(country), class: 'btn btn-primary' %>
-          <%= link_to "Destroy", country_path(country), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% if policy(country).edit? %>
+            <%= link_to "Edit", edit_country_path(country), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(country).destroy? %>
+            <%= link_to "Destroy", country_path(country), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>

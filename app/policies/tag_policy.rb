@@ -1,4 +1,4 @@
-class CategoryPolicy < ApplicationPolicy
+class TagPolicy < ApplicationPolicy
   def index?
     user.admin? || user.editor?
   end

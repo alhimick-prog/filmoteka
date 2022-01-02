@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   resources :films
   resources :categories
   resources :countries
-  resoursec :genres
+  resources :genres
+  resources :people
+  resources :tags
 end

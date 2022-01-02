@@ -1,0 +1,29 @@
+<%= form_with model: person do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+    <% person.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :birthday %><br>
+    <%= form.text_field :birthday, class: "form-control", "data-provide" => 'datepicker', 'data-date-format' => 'dd.mm.yyyy' %><br>
+    <% person.errors.full_messages_for(:birthday).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+    <div>
+    <%= form.label :death_date %><br>
+    <%= form.text_field :death_date, class: "form-control", "data-provide" => 'datepicker', 'data-date-format' => 'dd.mm.yyyy' %><br>
+    <% person.errors.full_messages_for(:death_date).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
