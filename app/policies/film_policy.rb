@@ -1,25 +1,29 @@
 class FilmPolicy < ApplicationPolicy
   def show?
+    return true if record.approved? && !user
     user.admin? || user.id == record.creator_id || record.approved?
   end
 
   def new?
-    user.admin? || user.editor?
+    create?
   end
 
   def create?
+    return false unless user
     user.admin? || user.editor?
   end
   
   def edit?
-    user.admin? || user.editor? && record.creator_id == user.id
+    update?
   end
 
   def update?
+    return false unless user
     user.admin? || user.editor? && record.creator_id == user.id
   end
 
   def destroy?
+    return false unless user
     user.admin? || user.editor? && record.creator_id == user.id
   end
 
@@ -30,13 +34,14 @@ class FilmPolicy < ApplicationPolicy
     end
 
     def resolve
-      # if user.admin?
-      #   scope.all
-      # else
-      #   scope.where(published: true)
-      # end
-      #scope.where(creator_id: 123, approved: false)
-      scope.all
+      return scope.where(approved: true) unless user
+      if user.admin?
+        scope.all
+      elsif user.editor?
+        scope.where('approved = true or creator_id = ?', user.id)
+      else
+        scope.where(approved: true)
+      end
     end
 
     private

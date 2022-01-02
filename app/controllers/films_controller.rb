@@ -10,10 +10,12 @@ class FilmsController < ApplicationController
 
   def new
     @film = Film.new
+    authorize(@film)
   end
 
   def create
     @film = Film.new(film_params)
+    authorize(@film)
 
     if @film.save
       redirect_to @film
@@ -24,10 +26,12 @@ class FilmsController < ApplicationController
 
   def edit
     @film = Film.find(params[:id])
+    authorize(@film)
   end
 
   def update
     @film = Film.find(params[:id])
+    authorize(@film)
 
     if @film.update(film_params)
       redirect_to @film
@@ -38,7 +42,8 @@ class FilmsController < ApplicationController
 
   def destroy
     @film = Film.find(params[:id])
-    @film.destroy
+    authorize(@film)
+    @film.destroy!
 
     redirect_to root_path
   end

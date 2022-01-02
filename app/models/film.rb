@@ -45,5 +45,7 @@ class Film < ApplicationRecord
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 21 }
 
+  accepts_nested_attributes_for :film_categories, :allow_destroy => false
+
   self.per_page = 15
 end

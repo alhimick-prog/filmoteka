@@ -49,7 +49,19 @@
 
   <div>
     <%= form.label :categories %><br>
-    <%= form.select(:categories, Category.all.map {|p| [ p.name, p.id ] } ) %> 
+      <%= form.fields_for :film_categories do |film_category_form| %>
+        <div class="incident-people new-person">
+            <%= film_category_form.inputs    :name=>'Add New category' do %>
+                <%= check_box_tag('category.id', checked_value = true, unchecked_value = false) %>
+            <% end %>
+        </div>
+      <% end %>
+    <% Category.all.each do |category| %>
+      <li>
+        <%= check_box_tag(category.id, checked_value = true, unchecked_value = false) %>
+        <%= label_tag(category.name) %>
+      </li>
+    <% end %>
   </div>
 
   <div>
