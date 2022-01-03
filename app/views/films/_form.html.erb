@@ -49,19 +49,22 @@
 
   <div>
     <%= form.label :categories %><br>
-      <%= form.fields_for :film_categories do |film_category_form| %>
-        <div class="incident-people new-person">
-            <%= film_category_form.inputs    :name=>'Add New category' do %>
-                <%= check_box_tag('category.id', checked_value = true, unchecked_value = false) %>
-            <% end %>
-        </div>
-      <% end %>
     <% Category.all.each do |category| %>
       <li>
-        <%= check_box_tag(category.id, checked_value = true, unchecked_value = false) %>
+        <%= check_box_tag("categories[]", category.id, film.category_ids.include?(category.id)) %>
         <%= label_tag(category.name) %>
       </li>
     <% end %>
+  </div>
+
+  <div>
+  <%= form.label :genres %><br>
+  <% Genre.all.each do |genre| %>
+    <li>
+      <%= check_box_tag("genres[]", genre.id, film.genre_ids.include?(genre.id)) %>
+      <%= label_tag(genre.name) %>
+    </li>
+  <% end %>
   </div>
 
   <div>
