@@ -1,18 +1,16 @@
 class CountriesController < ApplicationController
   def index
-    @countries = policy_scope(Country.all)
+    @countries = Country.all
   end
 
   def new
     @country = Country.new
-    authorize(@country)
   end
 
   def create
     @country = Country.new(country_params)
-    authorize(@country)
 
-    if @genre.save
+    if @country.save
       redirect_to countries_path
     else
       render :new
@@ -21,14 +19,12 @@ class CountriesController < ApplicationController
 
   def edit
     @country = Country.find(params[:id])
-    authorize(@country)
   end
 
   def update
     @country = Country.find(params[:id])
-    authorize(@country)
 
-    if @genre.update(country_params)
+    if @country.update(country_params)
       redirect_to countries_path
     else
       render :edit

@@ -1,7 +1,5 @@
 <h1 class="text-center">Tags list</h1>
-<% if policy(Tag).new? %>
-  <%= link_to "Create tag", new_tag_path, class: 'btn btn-primary' %>
-<% end %>
+<%= link_to "Create tag", new_tag_path, class: 'btn btn-primary' %>
 <table class="table">
   <thead>
     <tr>
@@ -20,12 +18,8 @@
         <td><%=tag.created_at%></td>
         <td><%=tag.updated_at%></td>
         <td>
-          <% if policy(tag).edit? %>
-            <%= link_to "Edit", edit_tag_path(tag), class: 'btn btn-primary' %>
-          <% end %>
-          <% if policy(tag).destroy? %>
-            <%= link_to "Destroy", tag_path(tag), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-          <% end %>
+          <%= link_to "Edit", edit_tag_path(tag), class: 'btn btn-primary' %>
+          <%= link_to "Destroy", tag_path(tag), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>

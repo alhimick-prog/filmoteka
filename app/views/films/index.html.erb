@@ -20,12 +20,8 @@
         <td><%=film.categories.map(&:name).join(', ') %></td>
         <td><%=film.genres.map(&:name).join(', ')%></td>
         <td>
-          <% if policy(film).edit? %>
-            <%= link_to "Edit", edit_film_path(film), class: 'btn btn-primary' %>
-          <% end %>
-          <% if policy(film).destroy? %>
-            <%= link_to "Destroy", film_path(film), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-          <% end %>
+          <%= link_to "Edit", edit_film_path(film), class: 'btn btn-primary' %>
+          <%= link_to "Destroy", film_path(film), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>

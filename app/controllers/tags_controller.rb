@@ -1,16 +1,14 @@
 class TagsController < ApplicationController
   def index
-    @tags = policy_scope(Tag.all)
+    @tags = Tag.all
   end
 
   def new
     @tag = Tag.new
-    authorize(@tag)
   end
 
   def create
     @tag = Tag.new(tag_params)
-    authorize(@tag)
 
     if @tag.save
       redirect_to tags_path
@@ -21,12 +19,10 @@ class TagsController < ApplicationController
 
   def edit
     @tag = Tag.find(params[:id])
-    authorize(@tag)
   end
 
   def update
     @tag = Tag.find(params[:id])
-    authorize(@tag)
 
     if @tag.update(tag_params)
       redirect_to tags_path
@@ -37,7 +33,6 @@ class TagsController < ApplicationController
 
   def destroy
     @tag = Tag.find(params[:id])
-    authorize(@tag)
     @tag.destroy
 
     redirect_to tags_path

@@ -1,7 +1,5 @@
 <h1 class="text-center">People list</h1>
-<% if policy(Person).new? %>
-  <%= link_to "Create person", new_person_path, class: 'btn btn-primary' %>
-<% end %>
+<%= link_to "Create person", new_person_path, class: 'btn btn-primary' %>
 <table class="table">
   <thead>
     <tr>
@@ -24,12 +22,8 @@
         <td><%=person.created_at%></td>
         <td><%=person.updated_at%></td>
         <td>
-          <% if policy(person).edit? %>
-            <%= link_to "Edit", edit_person_path(person), class: 'btn btn-primary' %>
-          <% end %>
-          <% if policy(person).destroy? %>
-            <%= link_to "Destroy", person_path(person), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-          <% end %>
+          <%= link_to "Edit", edit_person_path(person), class: 'btn btn-primary' %>
+          <%= link_to "Destroy", person_path(person), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
