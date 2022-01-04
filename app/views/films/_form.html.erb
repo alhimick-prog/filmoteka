@@ -58,13 +58,39 @@
   </div>
 
   <div>
-  <%= form.label :genres %><br>
-  <% Genre.all.each do |genre| %>
-    <li>
-      <%= check_box_tag("genres[]", genre.id, film.genre_ids.include?(genre.id)) %>
-      <%= label_tag(genre.name) %>
-    </li>
-  <% end %>
+    <%= form.label :genres %><br>
+    <% Genre.all.each do |genre| %>
+      <li>
+        <%= check_box_tag("genres[]", genre.id, film.genre_ids.include?(genre.id)) %>
+        <%= label_tag(genre.name) %>
+      </li>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :tags %><br>
+    <%= form.text_field :tags_string, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:tags).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :countries %><br>
+    <%= form.text_field :countries_string, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:countris).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label 'Actors' %><br>
+    <%= form.text_field :actors_string, class: "form-control" %><br>
+    <%= form.label 'Directors' %><br>
+    <%= form.text_field :directors_string, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:person).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
 
   <div>
