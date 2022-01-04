@@ -1,5 +1,8 @@
 <%= form_with model: season do |form| %>
   <div>
+    <%= hidden_field_tag :film_id, film_id %>
+  </div>
+  <div>
     <%= form.label :title %><br>
     <%= form.text_field :title %>
     <% season.errors.full_messages_for(:title).each do |message| %>
