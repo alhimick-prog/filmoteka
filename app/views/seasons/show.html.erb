@@ -1,0 +1,8 @@
+<h2><%= link_to "#{@film.title}", film_path(@film) %></h2>
+<h1><%= @season.title %></h1>
+<h3><%= link_to 'Season list', seasons_path(@film.id) %></h3>
+<%= link_to "Edit", edit_season_path(@season), class: 'btn btn-primary' %></li>
+<%= link_to "Destroy", season_path(@season), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></li>
+<p><%= @season.description %></p>
+<p><%= @season.release_date.year %></p>
+<p>Episodes list:</p>
