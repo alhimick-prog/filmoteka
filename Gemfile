@@ -35,9 +35,9 @@ end
 
 group :development do
   gem 'listen', '~> 3.3'
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'pry', '~> 0.13.1'
   gem 'pry-rails', '~> 0.3.9'
+  gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
 end

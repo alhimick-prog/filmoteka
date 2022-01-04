@@ -45,11 +45,12 @@ class Film < ApplicationRecord
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 21 }
 
-  accepts_nested_attributes_for :film_categories, :film_genres, :film_tags, :film_countries, :film_people, allow_destroy: true
+  accepts_nested_attributes_for :film_categories, :film_genres, :film_tags, :film_countries, :film_people,
+                                allow_destroy: true
 
   self.per_page = 15
 
-  attr_accessor :tags_string, :countries_string, :actors_string, :directors_string
+  attr_writer :tags_string, :countries_string, :actors_string, :directors_string
 
   def tags_string
     tags.map(&:name).join(', ')

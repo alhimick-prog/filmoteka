@@ -7,6 +7,7 @@ AllCops:
     - 'config/**/*'
     - 'script/**/*'
     - 'bin/**/*'
+    - 'app/controllers/concerns/film_attributes.rb'
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Documentation:
