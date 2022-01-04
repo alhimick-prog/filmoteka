@@ -1,5 +1,6 @@
-<h1><%=@film.title%></h1>
-<%= link_to 'Create season', new_season_path, class: 'btn btn-primary' %>
+<h2><%= link_to "#{@film.title}", film_path(@film) %></h2>
+<%= link_to 'Create season', new_season_path(film_id: @film.id), class: 'btn btn-primary' %>
+<h2>Seasons list:</h2>
 <ul>
   <% @seasons.each do |season| %>
     <li>

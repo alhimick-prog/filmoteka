@@ -63,9 +63,9 @@
   </p>
   <p>
   <% if !@film.seasons.size.zero? %>
-    <%= link_to 'Seasons:', seasons_path(@film.id) %>
-    <% @film.seasons.each do |record| %>
-      <%= record.title %>
+    <%= link_to 'Seasons:', seasons_path(film_id: @film.id) %>
+    <% @film.seasons.each do |season| %>
+      <%= link_to "#{season.title}", season_path(season.id)  %>
     <% end %>
   <% end %>
   </p>

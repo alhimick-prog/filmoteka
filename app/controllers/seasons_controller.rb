@@ -1,22 +1,17 @@
 class SeasonsController < ApplicationController
-  def index
-    @film = Film.find(params[:id])
-    @seasons = @film.seasons.all
-  end
-
   def show
     @season = Season.find(params[:id])
-    @film = Film.find(@season.film_id)
-    @episodes = @season.episode.all
+    @film = @season.film
+    @episodes = @season.episode
   end
 
   def new
-    @film = Film.find(params[:id])
+    @film = Film.find(params[:film_id])
     @season = @film.seasons.new
   end
 
   def create
-    @film = Film.find(params[:id])
+    @film = Film.find(params[:film_id])
     @season = @film.seasons.new(season_params)
 
     if @season.save
