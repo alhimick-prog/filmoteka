@@ -1,4 +1,9 @@
 class SeasonsController < ApplicationController
+  def index
+    @film = Film.find(params[:film_id])
+    @seasons = @film.seasons.all
+  end
+
   def show
     @season = Season.find(params[:id])
     @film = @season.film

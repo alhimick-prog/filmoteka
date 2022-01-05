@@ -50,23 +50,26 @@
     <% end %>
   </p>
   <p>
-  Directors:
+    Directors:
     <% @film.film_people.each do |record| %>
       <%= Person.find(record.person_id).name if record.role == 'Director' %>
     <% end %>
   </p>
   <p>
-  Actors:
+    Actors:
     <% @film.film_people.each do |record| %>
       <%= Person.find(record.person_id).name if record.role == 'Actor' %>
     <% end %>
   </p>
   <p>
-  <% if !@film.seasons.size.zero? %>
-    <%= link_to 'Seasons:', seasons_path(film_id: @film.id) %>
-    <% @film.seasons.each do |season| %>
-      <%= link_to "#{season.title}", season_path(season.id)  %>
+    <% if !@film.seasons.size.zero? %>
+      <%= link_to 'Show seasons:', seasons_path(film_id: @film.id) %>
+      <% @film.seasons.each do |season| %>
+        <%= link_to "#{season.title}", season_path(season.id)  %>
+      <% end %>
     <% end %>
-  <% end %>
+  </p>
+  <p>
+    <%= link_to 'Create season', new_season_path(film_id: @film.id), class: 'btn btn-primary' %>
   </p>
 </ul>
