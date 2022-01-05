@@ -1,5 +1,7 @@
 <h1 class="text-center">Categories list</h1>
-<%= link_to "Create category", new_category_path, class: 'btn btn-primary' %>
+<% if policy(Category.new).new? %>
+  <%= link_to "Create category", new_category_path, class: 'btn btn-primary' %>
+<% end %>
 <table class="table">
   <thead>
     <tr>
@@ -18,8 +20,12 @@
         <td><%=category.created_at%></td>
         <td><%=category.updated_at%></td>
         <td>
-          <%= link_to "Edit", edit_category_path(category), class: 'btn btn-primary' %>
-          <%= link_to "Destroy", category_path(category), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% if policy(category).edit? %>
+            <%= link_to "Edit", edit_category_path(category), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(category).destroy? %>
+            <%= link_to "Destroy", category_path(category), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>

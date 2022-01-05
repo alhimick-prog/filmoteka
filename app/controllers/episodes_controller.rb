@@ -1,16 +1,19 @@
 class EpisodesController < ApplicationController
   def show
     @episode = Episode.find(params[:id])
+    authorize(@episode.season.film, :show?)
     @season = @episode.season
   end
 
   def new
     @season = Season.find(params[:season_id])
+    authorize(@season.film, :edit?)
     @episode = @season.episode.new
   end
 
   def create
     @season = Season.find(params[:season_id])
+    authorize(@season.film, :edit?)
     @episode = @season.episode.new(episode_params)
 
     if @episode.save
@@ -22,10 +25,12 @@ class EpisodesController < ApplicationController
 
   def edit
     @episode = Episode.find(params[:id])
+    authorize(@episode.season.film, :edit?)
   end
 
   def update
     @episode = Episode.find(params[:id])
+    authorize(@episode.season.film, :edit?)
 
     if @episode.update(episode_params)
       redirect_to @episode
@@ -36,6 +41,7 @@ class EpisodesController < ApplicationController
 
   def destroy
     @episode = Episode.find(params[:id])
+    authorize(@episode.season.film, :edit?)
     season_id = @episode.season_id
     @episode.destroy!
 

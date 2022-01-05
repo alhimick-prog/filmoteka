@@ -14,4 +14,8 @@ class Episode < ApplicationRecord
 
   validates :title, presence: true, length: { in: 1..100 }
   validates :description, length: { in: 1..300 }, allow_blank: true
+
+  def approved?
+    season&.film&.approved?
+  end
 end

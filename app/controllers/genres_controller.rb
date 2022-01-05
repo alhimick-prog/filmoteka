@@ -1,14 +1,17 @@
 class GenresController < ApplicationController
   def index
-    @genres = Genre.all
+    @genres = policy_scope(Genre.all)
+    authorize(Genre.new)
   end
 
   def new
     @genre = Genre.new
+    authorize(@genre)
   end
 
   def create
     @genre = Genre.new(genre_params)
+    authorize(@genre)
 
     if @genre.save
       redirect_to genres_path
@@ -19,10 +22,12 @@ class GenresController < ApplicationController
 
   def edit
     @genre = Genre.find(params[:id])
+    authorize(@genre)
   end
 
   def update
     @genre = Genre.find(params[:id])
+    authorize(@genre)
 
     if @genre.update(genre_params)
       redirect_to genres_path
@@ -33,7 +38,8 @@ class GenresController < ApplicationController
 
   def destroy
     @genre = Genre.find(params[:id])
-    @genre.destroy
+    authorize(@genre)
+    @genre.destroy!
 
     redirect_to genres_path
   end

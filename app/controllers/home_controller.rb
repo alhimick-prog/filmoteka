@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @films = Film.all
+    @films = policy_scope(Film.all)
   end
 end

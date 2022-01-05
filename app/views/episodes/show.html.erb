@@ -1,5 +1,8 @@
 <h2><%= link_to "#{@season.title}", season_path(@season) %></h2>
 <h2><%= @episode.title %></h2>
 <p><%= @episode.description %> </p>
-<%= link_to "Edit", edit_episode_path(@episode), class: 'btn btn-primary' %>
-<%= link_to "Destroy", episode_path(@episode), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+<% if policy(@episode.season.film).edit? %>
+  <%= link_to "Edit", edit_episode_path(@episode), class: 'btn btn-primary' %>
+  <%= link_to "Destroy", episode_path(@episode), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+<% end %>
+
