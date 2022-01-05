@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :tags
   resources :seasons
   resources :episodes
+  resources :comments
 end
