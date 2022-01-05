@@ -1,0 +1,32 @@
+<h2><%= link_to "#{@film.title}", film_path(@film) %></h2>
+<h1><%= @season.title %></h1>
+<h4><%= link_to 'Go to seasons list', seasons_path(film_id: @film.id) %></h4>
+<%= link_to "Edit", edit_season_path(@season), class: 'btn btn-primary' %></li>
+<%= link_to "Destroy", season_path(@season), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></li>
+<p><%= @season.description %></p>
+<p><%= @season.release_date.year %></p>
+<p>Episodes list:</p>
+<%= link_to "Add episode", new_episode_path(season_id: @season.id), class: 'btn btn-primary' %></li>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Picture</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @season.episode.each do |episode| %>
+      <tr>
+        <td>picture</td>
+        <td><%= link_to "#{episode.title}", episode_path(episode) %></td>
+        <td><%= episode.description %></td>
+        <td>
+          <%= link_to "Edit", edit_episode_path(episode), class: 'btn btn-primary' %>
+          <%= link_to "Destroy", episode_path(episode), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

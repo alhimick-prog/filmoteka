@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :genres
   resources :people
   resources :tags
+  resources :seasons
+  resources :episodes
 end

@@ -1,0 +1,32 @@
+<%= form_with model: season do |form| %>
+  <div>
+    <%= hidden_field_tag :film_id, film_id %>
+  </div>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    <% season.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_field :description %>
+    <% season.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :release_date %><br>
+    <%= form.text_field :release_date, class: "form-control", "data-provide" => 'datepicker', 'data-date-format' => 'dd.mm.yyyy' %><br>
+    <% season.errors.full_messages_for(:release_date).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
