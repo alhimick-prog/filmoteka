@@ -1,0 +1,12 @@
+<h2><%= link_to "#{@film.title}", film_path(@film) %></h2>
+<% if policy(@film).edit? %>
+  <%= link_to 'Create season', new_season_path(film_id: @film.id), class: 'btn btn-primary' %>
+<% end %>
+<h2>Seasons list:</h2>
+<ul>
+  <% @seasons.each do |season| %>
+    <li>
+      <h4><%= link_to "#{season.title}", season_path(season) %></h4>
+    </li>
+  <% end %>
+</ul>

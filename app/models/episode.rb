@@ -12,6 +12,12 @@
 class Episode < ApplicationRecord
   belongs_to :season
 
+  has_many :comments, as: :commentable, dependent: :destroy
+
   validates :title, presence: true, length: { in: 1..100 }
   validates :description, length: { in: 1..300 }, allow_blank: true
+
+  def approved?
+    season&.film&.approved?
+  end
 end

@@ -13,7 +13,7 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
 #  name                   :string           not null
-#  role                   :integer          default(0), not null
+#  role                   :integer          default("subscriber"), not null
 #  nickname               :string
 #  birthday               :datetime         default(Thu, 01 Jan 1970 00:00:00.000000000 UTC +00:00), not null
 #  address                :string
@@ -27,8 +27,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum role: { subscriber: 0, editor: 1, admin: 2 }
 
-  has_many :creator_films, class_name: 'Film', foreign_key: :creator_id
-  has_many :watch_items
+  has_many :creator_films, class_name: 'Film', foreign_key: :creator_id, dependent: :nullify, inverse_of: :creator
+  has_many :watch_items, dependent: :destroy
   has_many :films, through: :watch_items
   has_many :comment, dependent: nil
+
+  def admin?
+    role == 'admin'
+  end
+
+  def editor?
+    role == 'editor'
+  end
 end

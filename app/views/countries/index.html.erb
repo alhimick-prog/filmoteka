@@ -1,0 +1,35 @@
+<h1 class="text-center">Countries list</h1>
+<% if policy(Country.new).edit? %>
+  <%= link_to "Create country", new_country_path, class: 'btn btn-primary' %>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Banner</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Updated at</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @countries.each do |country| %>
+      <tr>
+        <td><%=country.id%></td>
+        <td><%=country.name%></td>
+        <td><%=country.banner%></td>
+        <td><%=country.created_at%></td>
+        <td><%=country.updated_at%></td>
+        <td>
+          <% if policy(country).edit? %>
+            <%= link_to "Edit", edit_country_path(country), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(country).destroy? %>
+            <%= link_to "Destroy", country_path(country), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

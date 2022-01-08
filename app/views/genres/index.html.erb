@@ -1,0 +1,33 @@
+<h1 class="text-center">Genres list</h1>
+<% if policy(Genre.new).new? %>
+  <%= link_to "Create genre", new_genre_path, class: 'btn btn-primary' %>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Updated at</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @genres.each do |genre| %>
+      <tr>
+        <td><%=genre.id%></td>
+        <td><%=genre.name%></td>
+        <td><%=genre.created_at%></td>
+        <td><%=genre.updated_at%></td>
+        <td>
+          <% if policy(genre).edit? %>
+            <%= link_to "Edit", edit_genre_path(genre), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(genre).destroy? %>
+            <%= link_to "Destroy", genre_path(genre), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,99 @@
+<%= form_with model: film do |form| %>
+  <div class="form-group">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, class: "form-control" %>
+    <% film.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :trailer_url %><br>
+    <%= form.text_area :trailer_url, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:trailer_url).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :release_date %><br>
+    <%= form.text_field :release_date, class: "form-control", "data-provide" => 'datepicker', 'data-date-format' => 'dd.mm.yyyy' %><br>
+    <% film.errors.full_messages_for(:release_date).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :duration %><br>
+    <%= form.text_area :duration, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:duration).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :age_restriction %><br>
+    <%= form.text_area :age_restriction, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:age_restriction).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :categories %><br>
+    <% Category.all.each do |category| %>
+      <li>
+        <%= check_box_tag("categories[]", category.id, film.category_ids.include?(category.id)) %>
+        <%= label_tag(category.name) %>
+      </li>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :genres %><br>
+    <% Genre.all.each do |genre| %>
+      <li>
+        <%= check_box_tag("genres[]", genre.id, film.genre_ids.include?(genre.id)) %>
+        <%= label_tag(genre.name) %>
+      </li>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :tags %><br>
+    <%= form.text_field :tags_string, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:tags).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :countries %><br>
+    <%= form.text_field :countries_string, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:countris).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label 'Actors' %><br>
+    <%= form.text_field :actors_string, class: "form-control" %><br>
+    <%= form.label 'Directors' %><br>
+    <%= form.text_field :directors_string, class: "form-control" %><br>
+    <% film.errors.full_messages_for(:person).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

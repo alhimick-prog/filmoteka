@@ -1,0 +1,37 @@
+<h1 class="text-center">People list</h1>
+<% if policy(Genre.new).new? %>
+  <%= link_to "Create person", new_person_path, class: 'btn btn-primary' %>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Birthday</th>
+      <th scope="col">Date of death</th>
+      <th scope="col">Created at</th>
+      <th scope="col">Updated at</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%=person.id%></td>
+        <td><%=person.name%></td>
+        <td><%=person.birthday%></td>
+        <td><%=person.death_date%></td>
+        <td><%=person.created_at%></td>
+        <td><%=person.updated_at%></td>
+        <td>
+          <% if policy(person).edit? %>
+            <%= link_to "Edit", edit_person_path(person), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(person).destroy? %>
+            <%= link_to "Destroy", person_path(person), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

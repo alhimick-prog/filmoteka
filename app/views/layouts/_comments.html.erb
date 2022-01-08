@@ -1,0 +1,36 @@
+
+
+<div style="margin-left: 30px">
+<%= form_with model: Comment.new do |form| %>
+  <div>
+    <%= hidden_field_tag 'comment[commentable_type]', commentable.class %>
+    <%= hidden_field_tag 'comment[commentable_id]', commentable.id %>
+    <%= hidden_field_tag 'comment[user_id]', current_user.id %>
+
+    <%= form.label 'Text' %><br>
+    <%= form.text_field :body %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+<% commentable.comments.each do |comment| %>
+  <ul>
+    <p><%= 'user_icon' %></p>
+    <p>User:<%= comment.user.nickname || comment.user.name %></p>
+    <p>Text:<%= comment.body %></p>
+  </ul>
+  <% if policy(comment).edit? %>
+    <%= link_to "Edit", edit_comment_path(comment), class: 'btn btn-primary' %>
+  <% end %>
+  <% if policy(comment).destroy? %>
+    <%= link_to "Destroy", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+  <% end %>
+  <p>
+    Reply:
+    <%= render 'layouts/comments', commentable: comment%>
+
+  </p>
+<% end %>
+</div>
