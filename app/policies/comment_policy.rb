@@ -8,9 +8,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def create?
-    return false unless user
-
-    true
+    user.present?
   end
 
   def destroy?
