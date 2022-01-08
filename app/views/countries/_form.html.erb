@@ -10,7 +10,7 @@
   <div>
   <%= form.label :banner %><br>
   <%= form.text_field :banner %>
-  <% country.errors.full_messages_for(:name).each do |message| %>
+  <% country.errors.full_messages_for(:banner).each do |message| %>
     <div><%= message %></div>
   <% end %>
   </div>
