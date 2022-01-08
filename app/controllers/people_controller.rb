@@ -1,14 +1,17 @@
 class PeopleController < ApplicationController
   def index
-    @people = Person.all
+    @people = policy_scope(Person.all)
+    authorize(Person.new)
   end
 
   def new
     @person = Person.new
+    authorize(@person)
   end
 
   def create
     @person = Person.new(person_params)
+    authorize(@person)
 
     if @person.save
       redirect_to people_path
@@ -19,10 +22,12 @@ class PeopleController < ApplicationController
 
   def edit
     @person = Person.find(params[:id])
+    authorize(@person)
   end
 
   def update
     @person = Person.find(params[:id])
+    authorize(@person)
 
     if @person.update(person_params)
       redirect_to people_path
@@ -33,7 +38,8 @@ class PeopleController < ApplicationController
 
   def destroy
     @person = Person.find(params[:id])
-    @person.destroy
+    authorize(@person)
+    @person.destroy!
 
     redirect_to people_path
   end

@@ -1,5 +1,7 @@
 <h1 class="text-center">Genres list</h1>
-<%= link_to "Create genre", new_genre_path, class: 'btn btn-primary' %>
+<% if policy(Genre.new).new? %>
+  <%= link_to "Create genre", new_genre_path, class: 'btn btn-primary' %>
+<% end %>
 <table class="table">
   <thead>
     <tr>
@@ -18,8 +20,12 @@
         <td><%=genre.created_at%></td>
         <td><%=genre.updated_at%></td>
         <td>
-          <%= link_to "Edit", edit_genre_path(genre), class: 'btn btn-primary' %>
-          <%= link_to "Destroy", genre_path(genre), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% if policy(genre).edit? %>
+            <%= link_to "Edit", edit_genre_path(genre), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(genre).destroy? %>
+            <%= link_to "Destroy", genre_path(genre), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% end %>
         </td>
       </tr>
     <% end %>

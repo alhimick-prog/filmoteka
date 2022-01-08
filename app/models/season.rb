@@ -17,4 +17,8 @@ class Season < ApplicationRecord
   validates :title, presence: true, length: { in: 1..100 }
   validates :description, length: { in: 1..300 }, allow_blank: true
   validates_date :release_date, presence: true, between: ['01.01.1800', :today]
+
+  def approved?
+    film&.approved?
+  end
 end
