@@ -67,30 +67,32 @@
       <%= Person.find(record.person_id).name if record.role == 'Actor' %>
     <% end %>
   </p>
-  <p>
-    <% watch_list_record = current_user.watch_items.find_by(film_id: @film.id) %>
-    <% unless watch_list_record %>
-      <%= link_to 'Add to watching', watch_items_path(film_id: @film.id, user_id: current_user.id, status: 'watching'), method: :post, class: 'btn btn-success' %>
-      <%= link_to 'Add to viewed', watch_items_path(film_id: @film.id, user_id: current_user.id, status: 'viewed'), method: :post, class: 'btn btn-success' %>
-      <%= link_to 'Will watch', watch_items_path(film_id: @film.id, user_id: current_user.id, status: 'will_watch'), method: :post, class: 'btn btn-success' %>
-    <% else %>
-      <% unless watch_list_record.status == 'watching' %>
-        <%= link_to 'Transfer into watching', watch_item_path(watch_list_record, status: 'watching'), method: :put, class: 'btn btn-success' %>
-      <% else %>
-        <button type="button" class="btn btn-secondary">Watching</button>
-      <% end %>
-      <% unless watch_list_record.status == 'viewed' %>
-        <%= link_to 'Transfer into viewed', watch_item_path(watch_list_record, status: 'viewed'), method: :put, class: 'btn btn-success' %>
-      <% else %>
-        <button type="button" class="btn btn-secondary">Viewed</button>
-      <% end %>
-      <% unless watch_list_record.status == 'will_watch' %>
-        <%= link_to "Transfer into 'will watch'", watch_item_path(watch_list_record, status: 'will_watch'), method: :put, class: 'btn btn-success' %>
-      <% else %>
-        <button type="button" class="btn btn-secondary">Will watch</button>
-      <% end %>
+    <% if current_user.present? %>
+      <p>
+        <% watch_list_record = current_user.watch_items.find_by(film_id: @film.id) %>
+        <% unless watch_list_record %>
+          <%= link_to 'Add to watching', watch_items_path(film_id: @film.id, user_id: current_user.id, status: 'watching'), method: :post, class: 'btn btn-success' %>
+          <%= link_to 'Add to viewed', watch_items_path(film_id: @film.id, user_id: current_user.id, status: 'viewed'), method: :post, class: 'btn btn-success' %>
+          <%= link_to 'Will watch', watch_items_path(film_id: @film.id, user_id: current_user.id, status: 'will_watch'), method: :post, class: 'btn btn-success' %>
+        <% else %>
+          <% unless watch_list_record.status == 'watching' %>
+            <%= link_to 'Transfer into watching', watch_item_path(watch_list_record, status: 'watching'), method: :put, class: 'btn btn-success' %>
+          <% else %>
+            <button type="button" class="btn btn-secondary">Watching</button>
+          <% end %>
+          <% unless watch_list_record.status == 'viewed' %>
+            <%= link_to 'Transfer into viewed', watch_item_path(watch_list_record, status: 'viewed'), method: :put, class: 'btn btn-success' %>
+          <% else %>
+            <button type="button" class="btn btn-secondary">Viewed</button>
+          <% end %>
+          <% unless watch_list_record.status == 'will_watch' %>
+            <%= link_to "Transfer into 'will watch'", watch_item_path(watch_list_record, status: 'will_watch'), method: :put, class: 'btn btn-success' %>
+          <% else %>
+            <button type="button" class="btn btn-secondary">Will watch</button>
+          <% end %>
+        <% end %>
+      </p>
     <% end %>
-  </p>
   <p>
     <% if !@film.seasons.size.zero? %>
       <%= link_to 'Show seasons:', seasons_path(film_id: @film.id) %>

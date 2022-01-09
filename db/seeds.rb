@@ -10,6 +10,16 @@ class Seed
     Rake::Task['db:migrate'].invoke
   end
 
+  def self.seed_admin_user
+    puts "========== Seed admin users =========="
+    User.create!(email: 'example@example.com',
+                 name: 'admin',
+                 password: '123456',
+                 nickname: 'admin',
+                 birthday: Faker::Date.between(from: '1900-01-01', to: '2003-01-01'),
+                 role: 'admin')
+  end
+
   def self.seed_users(count = 1)
     puts "========== Seed #{count} users =========="
     count.times do
@@ -21,15 +31,25 @@ class Seed
     end
   end
 
-  def self.seed_films(count = 1)
-    puts "========== Seed #{count} films =========="
-    count.times do
+  def self.seed_films(approved = 1, unapproved = 1)
+    puts "========== Seed #{approved} approved films and #{unapproved} unapproved films =========="
+    approved.times do
       Film.create!(title: Faker::Movie.title,
                    description: Faker::Lorem.sentence(word_count: 10, supplemental: true, random_words_to_add: 10),
                    trailer_url: Faker::Internet.url,
                    release_date: Faker::Date.between(from: '1950-01-01', to: Date.today),
                    duration: rand(20..200),
-                   age_restriction: rand(0..21))
+                   age_restriction: rand(0..21),
+                   approved: true)
+    end
+    unapproved.times do
+      Film.create!(title: Faker::Movie.title,
+                   description: Faker::Lorem.sentence(word_count: 10, supplemental: true, random_words_to_add: 10),
+                   trailer_url: Faker::Internet.url,
+                   release_date: Faker::Date.between(from: '1950-01-01', to: Date.today),
+                   duration: rand(20..200),
+                   age_restriction: rand(0..21),
+                   approved: false)
     end
   end
 
@@ -157,18 +177,18 @@ class Seed
 
   def self.seed_editor_role_and_add_film_creator(count_creators = 1, count_films = 1)
     puts "========== #{count_creators} users to editors, #{count_films} films add creators =========="
-    count_creators.times do
-      User.all.sample.update!(role: 'editor')
+    User.all.sample(count_creators).each do |user|
+      user.update!(role: 'editor')
     end
-    count_films.times do
-      Film.all.sample.update!(creator_id: User.where(role: 'editor').ids.sample)
+    Film.all.sample(count_films).each do |film|
+      film.update!(creator_id: User.where(role: 'editor').ids.sample)
     end
   end
 end
 
 Seed.reset_database_before_seeding
 Seed.seed_users(20)
-Seed.seed_films(200)
+Seed.seed_films(150, 50)
 Seed.seed_categories
 Seed.seed_countries
 Seed.seed_genres
@@ -184,3 +204,4 @@ Seed.seed_f_people
 Seed.seed_f_tags
 Seed.seed_watch_items
 Seed.seed_editor_role_and_add_film_creator(count_creators = 10, count_films = 100)
+Seed.seed_admin_user

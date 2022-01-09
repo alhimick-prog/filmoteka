@@ -1,11 +1,10 @@
 <h1>Hello</h1>
 <ul>
-  <% 10.times do %>
     <li>
-      <% film = @films.sample %>
-      <p>
-        <%= link_to film.title, film_path(film.id) %>
-      </p>
+      <% @films.each do |film| %>
+        <p>
+          <%= link_to film.title, film_path(film.id) %>
+        </p>
+      <% end %>
     </li>
-  <% end %>
 </ul>
