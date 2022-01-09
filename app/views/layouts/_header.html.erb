@@ -6,7 +6,9 @@
     </button>
     <nav class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" style="color:blue" href="#">My profile</a>
+        <% if current_user.present? %>
+          <a class="nav-link" style="color:blue" href="/profile">My profile</a>
+        <% end %>
       </li>
       <% if @variable %> 
         <li class="nav-item">
