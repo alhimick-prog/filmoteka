@@ -1,4 +1,37 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Profile <%= resource_name.to_s.humanize %></h2>
+
+<h2>My movie lists:</h2>
+<% unless current_user.watch_items.empty? %>
+  <h4>Watching:</h4>
+  <li>
+    <% current_user.watch_items.where(status: 'watching').each do |item| %>
+      <p>
+        <%= link_to item.film.title, item.film %>
+        <%= link_to "Destroy", watch_item_path(item), method: :delete, class: 'btn btn-danger' %>
+      </p>
+    <% end %>
+  </li>
+  <h4>Viewed:</h4>
+  <li>
+    <% current_user.watch_items.where(status: 'viewed').each do |item| %>
+      <p>
+        <%= link_to item.film.title, item.film %>
+        <%= link_to "Destroy", watch_item_path(item), method: :delete, class: 'btn btn-danger' %>
+      </p>
+    <% end %>
+  </li>
+  <h4>Will watch:</h4>
+  <li>
+    <% current_user.watch_items.where(status: 'will_watch').each do |item| %>
+      <p>
+        <%= link_to item.film.title, item.film %>
+        <%= link_to "Destroy", watch_item_path(item), method: :delete, class: 'btn btn-danger' %>
+      </p>
+    <% end %>
+  </li>
+<% else %>
+ <h4>No watch items</h4>
+<% end %>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
