@@ -19,7 +19,7 @@ class WatchItemsController < ApplicationController
     @watch_item = WatchItem.find(params[:id])
     authorize(@watch_item)
     @watch_item.update!(watch_item_update_params)
-    
+
     redirect_back(fallback_location: root_path)
   end
 
