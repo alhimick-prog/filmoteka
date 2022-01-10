@@ -1,18 +1,22 @@
 # README
-* Ruby version '3.0.2'
+* Ruby version 3.0.2
 
 * System dependencies
-
-* Configuration
+ruby, gem bundler
 
 * Database creation
+rails db:seed
 
-* Database initialization
+Most hard part:
+Adding and editing actors, tags and other parameters of the film.
 
-* How to run the test suite
+Most interesting part:
+Adding and editing actors, tags and other parameters of the film. Gem pundit.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Instruction:
+1.Install Ruby needed version.
+2.Install gems: bundler, rails.
+3.Copy repository.
+4.Starting bundler in project foldef.
+5.rails s
+6.Open in browser http://127.0.0.1:3000/
