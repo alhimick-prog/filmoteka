@@ -52,6 +52,12 @@ class FilmsController < ApplicationController
     redirect_to films_path
   end
 
+  def search
+    @films = Film.where('title ILIKE ?', "%#{params[:keyword]}%").paginate(page: params[:page])
+    @keyword = params[:keyword]
+    authorize(Film.new)
+  end
+
   private
 
   def film_params

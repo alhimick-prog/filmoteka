@@ -32,6 +32,10 @@ class FilmPolicy < ApplicationPolicy
     user.admin? || (user.editor? && record.creator_id == user.id)
   end
 
+  def search?
+    true
+  end
+
   class Scope
     def initialize(user, scope)
       @user  = user

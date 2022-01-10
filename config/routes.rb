@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     get 'profile', to: 'devise/registrations#edit'
   end
   root "home#index"
-  resources :films
+  resources :films do
+    collection do
+      get 'search'
+    end
+  end
   resources :categories
   resources :countries
   resources :genres
