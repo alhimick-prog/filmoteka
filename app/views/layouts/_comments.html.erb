@@ -1,19 +1,21 @@
 
 
 <div style="margin-left: 30px">
-<%= form_with model: Comment.new do |form| %>
-  <div>
-    <%= hidden_field_tag 'comment[commentable_type]', commentable.class %>
-    <%= hidden_field_tag 'comment[commentable_id]', commentable.id %>
-    <%= hidden_field_tag 'comment[user_id]', current_user.id %>
+<% if current_user.present? %>
+  <%= form_with model: Comment.new do |form| %>
+    <div>
+      <%= hidden_field_tag 'comment[commentable_type]', commentable.class %>
+      <%= hidden_field_tag 'comment[commentable_id]', commentable.id %>
+      <%= hidden_field_tag 'comment[user_id]', current_user.id %>
 
-    <%= form.label 'Text' %><br>
-    <%= form.text_field :body %>
-  </div>
+      <%= form.label 'Text' %><br>
+      <%= form.text_field :body %>
+    </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>
 <% end %>
 <% commentable.comments.each do |comment| %>
   <ul>
@@ -27,10 +29,11 @@
   <% if policy(comment).destroy? %>
     <%= link_to "Destroy", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
   <% end %>
-  <p>
-    Reply:
-    <%= render 'layouts/comments', commentable: comment%>
-
-  </p>
+  <% if current_user.present? %>
+    <p>
+      Reply:
+      <%= render 'layouts/comments', commentable: comment%>
+    </p>
+  <% end %>
 <% end %>
 </div>

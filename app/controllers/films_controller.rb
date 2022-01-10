@@ -57,7 +57,7 @@ class FilmsController < ApplicationController
   def film_params
     params.require(:film).permit(:title, :description, :trailer_url, :release_date, :duration,
                                  :age_restriction, :creator_id, :tags_string, :countries_string,
-                                 :actors_string, :directors_string)
+                                 :actors_string, :directors_string, :approved)
   end
 
   def assign_film_attributes

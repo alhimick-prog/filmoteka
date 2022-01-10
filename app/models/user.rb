@@ -39,4 +39,10 @@ class User < ApplicationRecord
   def editor?
     role == 'editor'
   end
+
+  def configure_permitted_parameters
+    additional_params = [:name, :nickname]
+    devise_parameter_sanitizer.permit(:sign_up, keys: additional_params)
+    devise_parameter_sanitizer.permit(:account_update, keys: additional_params)
+  end
 end
