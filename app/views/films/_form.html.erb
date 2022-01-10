@@ -93,6 +93,14 @@
     <% end %>
   </div>
 
+  <% if current_user.admin? %>
+    <div>
+      <%= form.label 'Status' %><br>
+      <%= form.check_box(:approved) %>
+      <%= label_tag('Approved') %>
+    </div>
+  <% end %>
+
   <div>
     <%= form.submit class: 'btn btn-primary' %>
   </div>

@@ -9,6 +9,13 @@
     <% if policy(@film).destroy? %>
       <%= link_to "Destroy", film_path(@film), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
     <% end %>
+    <% if current_user.present? && (current_user.admin? || current_user.editor?) %>
+      <% if @film.approved? %>
+        <button type="button" class="btn btn-success">Approved</button>
+      <% else %>
+        <button type="button" class="btn btn-secondary">Unapproved</button>
+      <% end %>
+    <% end %>
   </p>
   <p>
     Description:
