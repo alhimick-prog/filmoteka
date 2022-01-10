@@ -1,0 +1,46 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Picture</th>
+      <th scope="col">Title</th>
+      <th scope="col">Year</th>
+      <th scope="col">Categories</th>
+      <th scope="col">Genres</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% films.each do |film| %>
+      <tr>
+        <td><%='film.picture'%></td>
+        <td><%= link_to film.title, film_path(film) %></td>
+        <td><%=film.release_date.year%></td>
+        <td><%=film.categories.map(&:name).join(', ') %></td>
+        <td><%=film.genres.map(&:name).join(', ')%></td>
+        <td>
+          <% if policy(film).edit? %>
+            <%= link_to "Edit", edit_film_path(film), class: 'btn btn-primary' %>
+          <% end %>
+          <% if policy(film).destroy? %>
+            <%= link_to "Destroy", film_path(film), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-danger' %>
+          <% end %>
+          <% if current_user.present? && (current_user.admin? || current_user.editor?) %>
+            <% if film.approved? %>
+              <button type="button" class="btn btn-success">Approved</button>
+            <% else %>
+              <button type="button" class="btn btn-secondary">Unapproved</button>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="center-container">
+  <div class="digg_pagination">
+    <div class="page_info">
+      <%= page_entries_info films %>
+    </div>
+    <%= will_paginate films, :container => false %>
+  </div>
+</div>

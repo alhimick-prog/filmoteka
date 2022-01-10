@@ -34,10 +34,10 @@
       </div>
     </nav>
   </nav>
-  <form class="form-inline my-2 my-lg-0 flexible-element">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn btn-info" style="color:blue" type="submit">Search</button>
-  </form>
+  <%= form_with url: search_films_path, method: :get, class: 'form-inline my-2 my-lg-0 flexible-element' do |form| %>
+    <%= form.text_field :keyword, class: 'form-control mr-sm-2', placeholder: 'Search' %>
+    <%= form.submit 'Search', class: 'btn btn btn-info', style: 'color:blue' %>
+  <% end %>
   <% if current_user %>
     <%= link_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
   <% else %>
